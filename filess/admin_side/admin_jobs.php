@@ -17,11 +17,11 @@ $query->execute();
   if(isset($_GET['reject']))
   {
       $id = $_GET['reject'];
-    $query1=$con->prepare("DELETE FROM `jobs` WHERE `id`=?");
-    $query1->bind_param("s",$id);
-    $query1->execute();
-    $run1= $query->get_result();
-    header("refresh:0.1; url=admin_jobs.php");
+      $query1=$con->prepare("UPDATE `jobs` SET `Flag`=-1 WHERE `id`=?");
+      $query1->bind_param("s",$id);
+      $query1->execute();
+      $run1= $query->get_result();
+      header("refresh:0.1; url=admin_jobs.php");
   }
 ?>
 <!DOCTYPE html>
@@ -32,7 +32,7 @@ $query->execute();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.jpg">
-    
+
     <meta name="author" content="">
 
     <title>admin jobs request</title>
@@ -70,7 +70,7 @@ $query->execute();
                       <a class="nav-link waves-effect waves-dark pro-pic" aria-haspopup="true" aria-expanded="false"><p><h4></h4></p> </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a class="nav-link waves-effect waves-dark pro-pic" aria-haspopup="true" aria-expanded="false"><p><h2>Admin Page</h2></p> </a>
+                      <a class="nav-link waves-effect waves-dark pro-pic" aria-haspopup="true" aria-expanded="false"><p><h3>Admin Page</h3></p> </a>
                     </li>
                   </ul>
                   <ul class="navbar-nav float-right">
@@ -103,9 +103,11 @@ $query->execute();
         <div class="page-wrapper">
             <div class="page-breadcrumb">
                 <div class="row">
-                    <div class="col-12 d-flex no-block align-items-center">
-                        <h2 class="page-title">Jobs Upload Request</h2>
-                    </div>
+                    <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4"></div>
+                      <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
+ <center><h2 class="page-title">Jobs Upload Request</h2></center>
+</div>
+   <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4"></div>
                 </div>
                 <br>
             </div>
@@ -117,24 +119,25 @@ $query->execute();
     <div class="row">
       <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1"></div>
        <div class="col-sm-10 col-md-10 col-xs-10 col-lg-10">
+
          <div class="card">
            <div class="card-body">
              <div class="row">
                <div class="col-sm-5 col-md-5 col-xs-5 col-lg-5">
                  <h3 class="card-title"><?php echo $res['name_of_company']; ?></h3>
-                 <h4><?php echo "Applicable for  " .$res['applicable_for']; ?></h4>
+                 <b><h4><?php echo "Applicable for  " .$res['applicable_for']; ?></h4>
                  <p class="card-text">Designation : <b><?php echo $res['designation']; ?></b><br></p>
                  <p class="card-text">Jobs Description : <b><?php echo $res['job_description']; ?></b><br></p>
                  Skills Required : <b><?php echo $res['skills_required']; ?></b><br>
                  Location : <b><?php echo $res['location']; ?></b><br>
                  Stipend : <b><?php echo $res['Stipend']; ?></b><br>
                  Apply By : <b><?php echo $res['last_date']; ?></b><br>
-                 Link for more details : <b><?php echo "<a href= " .$res['link'].">" .$res['link']." </a>" ;?></b><br>
+                 Link for more details : <b><?php echo "<a href= " .$res['link'].">" .$res['link']." </a>" ;?></b></b><br>
                </div>
                <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1"></div>
                <div class="col-sm-3 col-md-3 col-xs-3 col-lg-3">
               <p class="card-text">
-              <?php
+              <b><?php
               $user_name = $res['user_name'];
               $query_instructor="SELECT * FROM `instructor_info` WHERE `user_name`= '$user_name' ";
               $run_instructor=mysqli_query($con, $query_instructor);
@@ -145,18 +148,20 @@ $query->execute();
               echo "<h5> Email: " .$res_instructor['email']. "</h5>";
               echo "<h5> Phone: " .$res_instructor['mobno']. "</h5>";
               ?>
-            </p>
+            </b></p>
           </div>
           <div class="col-sm-3 col-md-3 col-xs-3 col-lg-3">
           <br>
         <form action="#" method="get" name="login">
-          <a href="admincour.php?approve=<?php echo $res['id']; ?>" class="btn btn-primary">Approve</a>
-          <a href="admincour.php?reject=<?php echo $res['id']; ?>" class="btn btn-danger">Reject</a>
+          <a href="admin_jobs.php?approve=<?php echo $res['id']; ?>" class="btn btn-info btn-lg">Approve</a>
+          <a href="admin_jobs.php?reject=<?php echo $res['id']; ?>" class="btn btn-danger btn-lg">Reject</a>
       </form>
     </div>
   </div>
 </div>
 </div>
+<br>
+<br>
 </div>
 <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1">
 </div>

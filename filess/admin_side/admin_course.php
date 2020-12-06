@@ -17,12 +17,12 @@ $query->execute();
   if(isset($_GET['reject']))
   {
       $id = $_GET['reject'];
-    $query1=$con->prepare("DELETE FROM `course` WHERE `id`=?");
-    $query1->bind_param("s",$id);
-    $query1->execute();
-    $run1= $query->get_result();
-    header("refresh:0.1; url=admin_course.php");
-  }
+      $query1=$con->prepare("UPDATE `courses` SET `Flag`=-1 WHERE `id`=?");
+      $query1->bind_param("s",$id);
+      $query1->execute();
+      $run1= $query->get_result();
+      header("refresh:0.1; url=admin_course.php");
+    }
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -69,7 +69,7 @@ $query->execute();
                       <a class="nav-link waves-effect waves-dark pro-pic" aria-haspopup="true" aria-expanded="false"><p><h4></h4></p> </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a class="nav-link waves-effect waves-dark pro-pic" aria-haspopup="true" aria-expanded="false"><p><h2>Admin Page</h2></p> </a>
+                      <a class="nav-link waves-effect waves-dark pro-pic" aria-haspopup="true" aria-expanded="false"><p><h3>Admin Page</h3></p> </a>
                     </li>
                   </ul>
                   <ul class="navbar-nav float-right">
@@ -101,11 +101,13 @@ $query->execute();
         </div>
         <div class="page-wrapper">
             <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-12 d-flex no-block align-items-center">
-                        <h2 class="page-title">Course Upload Request</h2>
-                    </div>
-                </div>
+              <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4"></div>
+                    <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
+<center><h2 class="page-title">Course Upload Request</h2></center>
+</div>
+ <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4"></div>
+              </div>
                 <br>
             </div>
             <hr>
@@ -121,17 +123,17 @@ $query->execute();
              <div class="row">
                <div class="col-sm-5 col-md-5 col-xs-5 col-lg-5">
                  <h3 class="card-title"><?php echo $res['course_name']; ?></h3>
-                 <h4><?php echo "Applicable for  " .$res['applicable_for']; ?></h4>
+                 <b><h4><?php echo "Applicable for  " .$res['applicable_for']; ?></h4>
                  <p class="card-text">Description : <b><?php echo $res['Course_Description']; ?></b><br></p>
                  <p class="card-text">Course Duration : <b><?php echo $res['course_duration']; ?></b><br></p>
                  <p class="card-text">Course Fees : <b><?php echo $res['course_fees']; ?></b><br></p>
-                 Link for more details : <b><?php echo '<a href= ' .$res['course_link'].'target="_blank"' .'>' .$res['course_link'].' </a>' ;?></b><br>
+                 Link for more details : <?php echo '<a href= ' .$res['course_link'].'target="_blank"' .'>' .$res['course_link'].' </a>' ;?></b><br>
 
                </div>
                <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1"></div>
                <div class="col-sm-3 col-md-3 col-xs-3 col-lg-3">
               <p class="card-text">
-              <?php
+              <b><?php
               $user_name = $res['user_name'];
               $query_instructor="SELECT * FROM `instructor_info` WHERE `user_name`= '$user_name' ";
               $run_instructor=mysqli_query($con, $query_instructor);
@@ -142,21 +144,24 @@ $query->execute();
               echo "<h5> Email: " .$res_instructor['email']. "</h5>";
               echo "<h5> Phone: " .$res_instructor['mobno']. "</h5>";
               ?>
-            </p>
+            </b></p>
           </div>
           <div class="col-sm-3 col-md-3 col-xs-3 col-lg-3">
           <br>
         <form action="#" method="get" name="login">
-          <a href="admincour.php?approve=<?php echo $res['id']; ?>" class="btn btn-primary">Approve</a>
-          <a href="admincour.php?reject=<?php echo $res['id']; ?>" class="btn btn-danger">Reject</a>
+          <a href="admin_course.php?approve=<?php echo $res['id']; ?>" class="btn btn-success btn-lg">Approve</a>
+          <a href="admin_course.php?reject=<?php echo $res['id']; ?>" class="btn btn-danger btn-lg">Reject</a>
       </form>
     </div>
   </div>
 </div>
 </div>
+<br>
+<br>
 </div>
 <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1">
 </div>
+
 </div>
 <?php
 } ?>
