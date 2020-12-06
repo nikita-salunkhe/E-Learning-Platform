@@ -6,7 +6,6 @@ $con=mysqli_connect('localhost','root','','Abhyuday');
 // for login`
 if(isset($_POST['confirm_student']))
 {
-
   $user_name= $_POST['user_name'];
 	$password= $_POST['password'];
 
@@ -104,14 +103,12 @@ box-shadow: 10px 10px grey;
                       <li class="nav-item dropdown">
                           <a class="nav-link waves-effect waves-dark pro-pic" href="Allcourses.php" aria-haspopup="true" aria-expanded="false"><p><h4>Courses</h4></p></a>
                       </li>
-                      <li class="nav-item dropdown">
-                        <a class="nav-link waves-effect waves-dark pro-pic" href="all_quiz.html" aria-haspopup="true" aria-expanded="false"><p><h4>Quiz</h4></p></a>
-                      </li>
+
                       <li class="nav-item dropdown">
                         <a class="nav-link waves-effect waves-dark pro-pic" href="Alljobs.php" aria-haspopup="true" aria-expanded="false"><p><h4>Jobs</h4></p> </a>
                       </li>
                       <li class="nav-item dropdown">
-                        <a class="nav-link waves-effect waves-dark pro-pic" href="Allschola.php" aria-haspopup="true" aria-expanded="false"><p><h4>Scholarship</h4></p> </a>
+                        <a class="nav-link waves-effect waves-dark pro-pic" href="Allscholar.php" aria-haspopup="true" aria-expanded="false"><p><h4>Scholarship</h4></p> </a>
                       </li>
                       </li>
                     </ul>
@@ -388,7 +385,7 @@ box-shadow: 10px 10px grey;
             <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x" style="font-size:36px; color: #0e76a8"> </i>
           </a>
           <a class="ins-ic">
-            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x" style="font-size:36px;  color: #3f729b;"> </i>
+            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x" style="font-size:36px;  color: #ff69B4;"> </i>
           </a>
         </div>
         <div class="row">
@@ -397,7 +394,7 @@ box-shadow: 10px 10px grey;
           <a class="phone">
             <i class="fa fa-phone" aria-hidden="true" style="font-size:36px;color: #d1c5cd"> </i>
             <br>
-            <h5 style="font-size:20px;color: #d1c5cd">7083472839</h5>
+            <h5 style="font-size:15px;color: #d1c5cd">7083472839</h5>
           </a>
           <br>
         </div>
@@ -405,7 +402,7 @@ box-shadow: 10px 10px grey;
           <a class="email">
             <i class="fa fa-envelope" aria-hidden="true" style="font-size:36px;color: #d1c5cd"> </i>
             <br>
-              <h6 style="font-size:20px;color: #d1c5cd">abc@gmail.com</h6>
+              <h6 style="font-size:15px;color: #d1c5cd">abc@gmail.com</h6>
           </a>
         </div>
         <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4"></div>

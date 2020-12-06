@@ -1,3 +1,14 @@
+<?php
+session_start();
+$con=mysqli_connect('localhost','root','','Abhyuday');
+$user_name = $_SESSION['user_name'];
+$_SESSION['user_name']=$user_name;
+$query=$con->prepare("SELECT * FROM `enrolled_courses` WHERE `user_name`= '$user_name'");
+$query->execute();
+$run= $query->get_result();
+$row=$run->num_rows;
+
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <head>
@@ -6,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.jpg">
 
     <title>Profile student</title>
     <link rel="stylesheet" type="text/css" href="../assets/libs/select2/dist/css/select2.min.css">
@@ -19,10 +31,10 @@
       height:120px;
       width:120px;
       border-radius:50%;
-      background-image:url("auct_farmer.jpg");
+      background-image:url("photo.jpg");
       background-size: 100% 100%;
       margin-left:50px;
-      margin-top:50px;
+      margin-top:10px;
       opacity:75%;
     }
 
@@ -37,37 +49,49 @@
         </div>
     </div>
     <div id="main-wrapper">
-        <header class="topbar" data-navbarbg="skin5">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header" data-logobg="skin5">
-                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                    <a class="navbar-brand" href="">
-                        <b class="logo-icon p-l-10">
-                             <img src="../assets/images/favicon.jpg" alt="user" class="rounded-circle" width="31"></b>
-                        <span class="logo-text">
-                        <h2>Shiksha</h2>
-                      </a>
-
-                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
-                </div>
-
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                    <ul class="navbar-nav float-left mr-auto"></ul>
-
-                    <ul class="navbar-nav float-right">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link  waves-effect waves-dark" href="#" ><i class="mdi mdi-home font-24"></i> Home</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link  waves-effect waves-dark" href="quiz.html" ><i class="mdi  mdi-pen"></i></i></i> Quiz</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link  waves-effect waves-dark" href="#" ><i class="mdi mdi-laptop"></i> Job portal</a>
-                        </li>
-                    </ul>
-                </div>
+      <header class="topbar" data-navbarbg="skin5">
+        <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+            <div class="navbar-header" data-logobg="dark">
+                <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                <a class="navbar-brand" href="">
+                    <b class="logo-icon p-l-10">
+                         <img src="../assets/images/favicon.jpg" alt="user" class="rounded-circle" width="31"></b>
+                          <span class="logo-text">
+                          <h2>Shiksha</h2>
+                  </a>
+                <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+            </div>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                <ul class="navbar-nav float-left mr-auto">
+                  <li class="nav-item dropdown">
+                    <center><h4 style =" color: white">Choose the language</h4>
+                    <div id="google_translate_element"></div>
+                    <script type="text/javascript">
+                    function googleTranslateElementInit() {
+                      new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                    }
+                    </script>
+                    <script type="text/javascript" src="language_translation.js"></script>
+                  </center>
+                  </li>
+                </ul>
+                <ul class="navbar-nav float-right">
+                  <li class="nav-item dropdown">
+                      <h4><a class="nav-link  waves-effect waves-dark"><i class="ti-user m-r-5 m"></i>
+                       <?php echo $user_name ?></a></h4>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <h4><a class="nav-link  waves-effect waves-dark" >
+                    </a></h4>
+                  </li>
+                    <li class="nav-item dropdown">
+                      <h4><a class="nav-link  waves-effect waves-dark" href="home.php" ><i class="mdi mdi-home font-24"></i> Log out
+                      </a></h4>
+                    </li>
+                </ul>
+            </div>
           </nav>
-      </header>
+    </header>
 
       <aside class="left-sidebar" data-sidebarbg="skin5">
             <div class="scroll-sidebar">
@@ -80,11 +104,18 @@
                       <br>
                       <br>
                       <br>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="indx.html" aria-expanded="false"><span class="hide-menu"></span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="indx.html" aria-expanded="false"><span class="hide-menu"></span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="p.html" aria-expanded="false"><span class="hide-menu">Name</span></a></li>
+                      <br>
+                      <br>
+
+
+
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="personal.php" aria-expanded="false"><i class="ti-user m-r-5 m"></i><span class="hide-menu">Personal info</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="education.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Education info</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allcourses.php?courses_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Courses</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allscholar.php?scholar_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Scholarships</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Alljobs.php?job_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Jobs</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="all_quiz.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Quiz</span></a></li>
+
                     </ul>
                 </nav>
             </div>
@@ -102,24 +133,42 @@
               <br>
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title m-b-0">My Applied Courses</h4>
-
+                      <h4 class="card-title m-b-0">My Applied Courses</h4>
                 </div>
               </div>
-              <br>
-              <br>
+
+       <?php
+       while($res=$run->fetch_assoc())
+       { ?>
               <div class="card">
                 <div class="card-body">
-                      <h4 class="card-title m-b-0">My Applied Scholarships</h4>
-                </div>
-              </div>
+
+                      <div class="row">
+                          <div class="col-sm-10 col-md-10 col-xs-10 col-lg-10"></div>
+                        <div class="col-sm-10 col-md-10 col-xs-10 col-lg-10">
+                       <p class="card-text">
+                       <?php
+                       $course_n = $res['course_n'];
+                       $query_courses="SELECT * FROM `courses` WHERE `id`= '$course_n' ";
+                       $run_courses=mysqli_query($con, $query_courses);
+                       $res_courses=mysqli_fetch_assoc($run_courses);
+                       echo "<h5> Course Name: " .$res_courses['course_name']. "</h5>";
+                       echo "<h5>Description: " .$res_courses['Course_Description']. "</h5>";
+                         ?>
+                         <a href="my_course.php?watch=<?php echo $res_courses['id']; ?>" class="btn btn-primary ">Watch</a>
+                         <?php
+                       ?>
+                     </p>
+                   </div>
+                   <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1"></div>
+                   <br>
+             </div>
+             </div>
+           </div>
+         <?php } ?>
               <br>
               <br>
-              <div class="card">
-                  <div class="card-body">
-                      <h4 class="card-title m-b-0">My Applied Jobs</h4>
-                  </div>
-              </div>
+
             </div>
 
             <div class="col-lg-3">

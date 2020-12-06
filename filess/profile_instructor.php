@@ -53,6 +53,18 @@ if(isset($_POST['submit_jobs']))
             $query1->execute();
             echo '<script>alert("registered sucessfully")</script>';
       }
+
+  $query_c=$con->prepare("SELECT * FROM `courses` WHERE `user_name`= '$user_name'");
+  $query_c->execute();
+  $run_c= $query_c->get_result();
+
+  $query_s=$con->prepare("SELECT * FROM `scholarship` WHERE `user_name`= '$user_name'");
+  $query_s->execute();
+  $run_s= $query_s->get_result();
+
+  $query_j=$con->prepare("SELECT * FROM `jobs` WHERE `user_name`= '$user_name'");
+  $query_j->execute();
+  $run_j= $query_j->get_result();
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -64,6 +76,7 @@ if(isset($_POST['submit_jobs']))
     <meta name="author" content="">
 
     <title>Profile instructor</title>
+      <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.jpg">
     <link rel="stylesheet" type="text/css" href="../assets/libs/select2/dist/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/libs/jquery-minicolors/jquery.minicolors.css">
     <link rel="stylesheet" type="text/css" href="../assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
@@ -71,6 +84,9 @@ if(isset($_POST['submit_jobs']))
     <link href="../dist/css/style.min.css" rel="stylesheet">
 
 <style type="text/css">
+.whole{
+  background-color: #FFFFFF;
+}
 .boxx{
 box-shadow: 10px 10px grey;
 }
@@ -135,7 +151,7 @@ box-shadow: 10px 10px grey;
             <div class="lds-pos"></div>
         </div>
     </div>
-    <div id="main-wrapper">
+    <div id="main-wrapper" class="whole">
         <header class="topbar" data-navbarbg="skin5">
           <nav class="navbar top-navbar navbar-expand-md navbar-dark">
               <div class="navbar-header" data-logobg="dark">
@@ -172,7 +188,7 @@ box-shadow: 10px 10px grey;
                       </a></h4>
                     </li>
                       <li class="nav-item dropdown">
-                        <h4><a class="nav-link  waves-effect waves-dark" href="#" ><i class="mdi mdi-home font-24"></i> Log out
+                        <h4><a class="nav-link  waves-effect waves-dark" href="home.php" ><i class="mdi mdi-home font-24"></i> Log out
                         </a></h4>
                       </li>
                   </ul>
@@ -185,15 +201,15 @@ box-shadow: 10px 10px grey;
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="personal.php" aria-expanded="false"><i class="ti-user m-r-5 m"></i><span class="hide-menu">personal info</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><span class="hide-menu"><h4>See your status of:</h4></span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="education.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Submitted Courses</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="education.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Submitted Scholarships</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="education.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Submitted Jobs</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#course_status" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Submitted Courses</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#job_status" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Submitted Scholarships</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#job_status" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Submitted Jobs</span></a></li>
                     </ul>
                 </nav>
             </div>
         </aside>
 <main>
-          <div class="page-wrapper">
+          <div class="page-wrapper" style= "background-color: white;">
              <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 align-items-center">
@@ -205,6 +221,8 @@ box-shadow: 10px 10px grey;
                             </div>
                       </div>
                   </div>
+
+
                   <br>
                   <br>
               <div class="row">
@@ -231,29 +249,29 @@ box-shadow: 10px 10px grey;
                                    <div class="md-form mb-5">
                                      <i class="fas fa-user prefix grey-text"></i>
                                      <label data-error="wrong" data-success="right" for="form34">Name of Company</label>
-                                     <input type="text" name ="name_of_company" id="form34" class="form-control ">
+                                     <input type="text" style="border: 0.5px solid gray;color:black;" name ="name_of_company" id="form34" class="form-control ">
                                    </div>
 
                                    <div class="md-form mb-5">
                                      <i class="fas fa-user prefix grey-text"></i>
                                      <label data-error="wrong" data-success="right" for="form34">Designation</label>
-                                     <input type="text" name ="designation" id="form34" class="form-control ">
+                                     <input type="text"style="border: 0.5px solid gray;color:black;"  name ="designation" id="form34" class="form-control ">
                                    </div>
 
                                    <div class="md-form mb-5">
                                     <label data-error="wrong" data-success="right" for="form32">Job Description</label>
-                                    <textarea type="text" id="form8" name= "job_description" class="md-textarea form-control" rows="4"></textarea>
+                                    <textarea type="text" id="form8" style="border: 0.5px solid gray;color:black;" name= "job_description" class="md-textarea form-control" rows="4"></textarea>
                                    </div>
 
                                    <div class="md-form mb-5">
                                     <label data-error="wrong" data-success="right" for="form32">Skills Required</label>
-                                    <textarea type="text" id="form8" name="skills_required" class="md-textarea form-control" rows="4"></textarea>
+                                    <textarea type="text" id="form8" style="border: 0.5px solid gray;color:black;" name="skills_required" class="md-textarea form-control" rows="4"></textarea>
                                    </div>
 
                                    <div class="md-form">
                                      <div class="form-group">
                                        <label for="inputState">Applicable for</label>
-                                       <select id="inputState" name ="applicable_for" class="form-control" onchange="selected()">
+                                       <select id="inputState" style="border: 0.5px solid gray;color:black;" name ="applicable_for" class="form-control" onchange="selected()">
                                          <option selected>All</option>
                                          <option value="Blind" >Blind</option>
                                          <option value="Deaf" >Deaf</option>
@@ -264,21 +282,21 @@ box-shadow: 10px 10px grey;
                                    </div>
                                      <div class="md-form">
                                      <label data-error="wrong" data-success="right" for="form8">Location</label>
-                                      <input type="text" id="form29" name ="location" class="form-control " >
+                                      <input type="text" id="form29"style="border: 0.5px solid gray;color:black;"  name ="location" class="form-control " >
 
                                     <div class="md-form">
                                      <label data-error="wrong" data-success="right" for="form8">Stipend</label>
-                                      <input type="text" id="form29" name="stipend" class="form-control " >
+                                      <input type="text" id="form29" style="border: 0.5px solid gray;color:black;" name="stipend" class="form-control " >
 
                                    </div>
                                    <div class="md-form">
                                      <label data-error="wrong" data-success="right" for="form8">Apply by Date :</label>
-                                      <input type="date" id="form29" name="last_date" class="form-control " >
+                                      <input type="date" id="form29"style="border: 0.5px solid gray;color:black;"  name="last_date" class="form-control " >
 
                                    </div>
                                    <div class="md-form mb-5">
                                     <label data-error="wrong" data-success="right" for="form32">Link for apply</label>
-                                    <input type="text" id="form8" name= "link" class="form-control " >
+                                    <input type="text" id="form8" style="border: 0.5px solid gray;color:black;" name= "link" class="form-control " >
                                    </div>
 
                                  </div>
@@ -317,24 +335,24 @@ box-shadow: 10px 10px grey;
                                      <div class="md-form mb-5">
                                        <i class="fas fa-user prefix grey-text"></i>
                                        <label data-error="wrong" data-success="right" for="form34">Name of Scholorship</label>
-                                       <input type="text" id="form34"name="name_of_scholarship" class="form-control ">
+                                       <input type="text" id="form34" style="border: 0.5px solid gray;color:black;" name="name_of_scholarship" class="form-control ">
                                      </div>
 
                                      <div class="md-form mb-5">
                                        <i class="fas fa-envelope prefix grey-text"></i>
                                        <label data-error="wrong" data-success="right" for="form29">Scholarship Description</label>
-                                       <textarea type="text" id="form29" name ="scholarship_description" class="form-control " class="md-textarea form-control" rows="4"></textarea>
+                                       <textarea type="text" id="form29" style="border: 0.5px solid gray;color:black;" name ="scholarship_description" class="form-control " class="md-textarea form-control" rows="4"></textarea>
                                     </div>
                                     <div class="md-form mb-5">
                                       <i class="fas fa-envelope prefix grey-text"></i>
                                       <label data-error="wrong" data-success="right" for="form29">Conditions for applying</label>
-                                      <textarea type="text" id="form29" name ="condition_for_applying" class="form-control " class="md-textarea form-control" rows="4"></textarea>
+                                      <textarea type="text" id="form29" style="border: 0.5px solid gray;color:black;" name ="condition_for_applying" class="form-control " class="md-textarea form-control" rows="4"></textarea>
                                    </div>
 
                                      <div class="md-form">
                                        <div class="form-group">
                                          <label for="inputState">Applicable for</label>
-                                         <select id="inputState" name ="applicable_for" class="form-control" onchange="selected()">
+                                         <select id="inputState" style="border: 0.5px solid gray;color:black;" name ="applicable_for" class="form-control" onchange="selected()">
                                            <option selected>All</option>
                                            <option value="Blind" >Blind</option>
                                            <option value="Deaf" >Deaf</option>
@@ -346,12 +364,12 @@ box-shadow: 10px 10px grey;
 
                                       <div class="md-form">
                                        <label data-error="wrong" data-success="right" for="form8">Link for more details :</label>
-                                        <input type="text" id="form29" name="scholarship_link" class="form-control " >
+                                        <input type="text" id="form29" style="border: 0.5px solid gray;color:black;" name="scholarship_link" class="form-control " >
                                      </div>
 
                                       <div class="md-form">
                                        <label data-error="wrong" data-success="right" for="form8">Apply by date :</label>
-                                        <input type="date" id="form29" name="last_date" class="form-control " >
+                                        <input type="date" id="form29" style="border: 0.5px solid gray;color:black;" name="last_date" class="form-control " >
                                      </div>
 
                                    </div>
@@ -365,11 +383,146 @@ box-shadow: 10px 10px grey;
                             </div>
                             <!--scholarship end-->
                       </div>
-                    </div>
-                  </div>
-              </div>
+<br>
+<br>
+  <div class="row" id="course_status">
+      <div class="col-1 align-items-center"></div>
+      <div class="col-10 align-items-center">
+        <center><h3><b> Registered  Courses</b></h3></center>
+        <table class="table table-hover table table-bordered table table-striped table table-hover">
+          <thead>
+            <tr>
+              <b><th scope="col">Sr No.</th></b>
 
-              
+              <th scope="col">Course Name</th>
+
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+      <b><?php
+      $i=0;
+         while($res_c=$run_c->fetch_assoc())
+        {
+            $i=$i+1;?>
+            <tr>
+
+              <td><?php echo $i?></td>
+              <td><?php echo $res_c['course_name']?></td>
+
+              <td><?php
+               if($res_c['Flag']==1)
+                 echo "Accepted";
+              else if($res_c['Flag']==-1)
+                  echo "Rejected";
+              else
+                  echo "Pending";
+
+                ?></td>
+
+            </tr>
+            <?php
+          }
+          ?></b>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-1 align-items-center"></div>
+        </div>
+    </div>
+<br>
+<br>
+  <div class="row" id="job_status">
+      <div class="col-1 align-items-center"></div>
+      <div class="col-5 align-items-center">
+        <center><h3><b> Registered  Jobs</b></h3></center>
+        <table class="table table-hover table table-bordered table table-striped table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Sr No.</th>
+              <th scope="col">Company Name</th>
+
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+      <?php
+      $i=0;
+         while($res_j=$run_j->fetch_assoc())
+        {
+            $i=$i+1;?>
+            <tr>
+
+              <td><?php echo $i?></td>
+              <td><?php echo $res_j['name_of_company']?></td>
+
+              <td><?php
+               if($res_j['flag']==1)
+                 echo "Accepted";
+              else if($res_j['flag']==0)
+                  echo "Pending";
+                  else{
+                    echo "Rejected";
+                  }
+                ?></td>
+
+            </tr>
+            <?php
+          }
+          ?>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-5 align-items-center">
+        <center><h3><b> Registered  Scholarships</b></h3></center>
+        <table class="table table-hover table table-bordered table table-striped table table-hover">
+
+          <thead >
+
+            <tr>
+              <th scope="col">Sr No.</th>
+              <th scope="col">Scholarship Name</th>
+
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+      <?php
+      $i=0;
+         while($res_s=$run_s->fetch_assoc())
+        {
+            $i=$i+1;?>
+            <tr>
+
+              <td><?php echo $i?></td>
+              <td><?php echo $res_s['name_of_scholarship']?></td>
+
+              <td><?php
+               if($res_s['flag']==1)
+                 echo "Accepted";
+              else if($res_s['flag']==0)
+                  echo "Pending";
+                  else{
+                    echo "Rejected";
+                  }
+                ?></td>
+
+            </tr>
+            <?php
+          }
+          ?>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-1 align-items-center"></div>
+        </div>
+    </div>
+
+ </div>
+ </div>
+</div>
+
+
 </main>
 <!-- courses-->
 <div class="modal fade courses" id="courses" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -381,42 +534,42 @@ box-shadow: 10px 10px grey;
    </div>
 
       <div class="modal-body mx-3">
-        <form action="#" method="post" name="login" class="needs-validation">
+        <form action="#" method="post" sname="login" class="needs-validation">
           <div class="md-form mb-5">
             <i class="fas fa-user prefix grey-text"></i>
             <label data-error="wrong" data-success="right" for="form34"><h5>Course Name</h4></label>
-            <input type="text" id="form34" name ="course_name" style="border: 0.5px solid gray;color:black;" class="form-control ">
+            <input type="text" id="form34" style="border: 0.5px solid gray;color:black;" name ="course_name" style="border: 0.5px solid gray;color:black;" class="form-control ">
           </div>
 
           <div class="md-form mb-5">
             <i class=""></i>
            <label data-error="wrong" data-success="right" for="form32"><h5>Course Descriptionn</h5></label>
-           <textarea type="text" id="form8" name="course_description" style="border: 0.5px solid gray;color:black;" class="md-textarea form-control" rows="4"></textarea>
+           <textarea type="text" id="form8" style="border: 0.5px solid gray;color:black;" name="course_description" style="border: 0.5px solid gray;color:black;" class="md-textarea form-control" rows="4"></textarea>
           </div>
 
           <div class="md-form mb-5">
             <i class=""></i>
             <label data-error="wrong" data-success="right" for="form29"><h5>Course Duration</h5></label>
-            <input type="text" id="form29" name="course_duration" style="border: 0.5px solid gray;color:black;" class="form-control " >
+            <input type="text" id="form29" style="border: 0.5px solid gray;color:black;" name="course_duration" style="border: 0.5px solid gray;color:black;" class="form-control " >
             </div>
 
             <div class="md-form mb-5">
               <i class=""></i>
               <label data-error="wrong" data-success="right" for="form29"><h5>Link of course</h5></label>
-              <input type="text" id="form29" name="course_link" style="border: 0.5px solid gray;color:black;" class="form-control " >
+              <input type="text" id="form29" style="border: 0.5px solid gray;color:black;" name="course_link" style="border: 0.5px solid gray;color:black;" class="form-control " >
             </div>
 
             <div class="md-form mb-5">
               <i class=""></i>
               <label data-error="wrong" data-success="right" for="form29"><h5>Course Fee</h5></label>
-              <input type="text" id="form29" name="course_fees" style="border: 0.5px solid gray;color:black;" class="form-control " >
+              <input type="text" id="form29" style="border: 0.5px solid gray;color:black;" name="course_fees" style="border: 0.5px solid gray;color:black;" class="form-control " >
             </div>
 
 
             <div class="md-form">
               <div class="form-group">
                 <label for="inputState">Applicable for</label>
-                <select id="inputState" name ="applicable_for" class="form-control" onchange="selected()">
+                <select id="inputState" style="border: 0.5px solid gray;color:black;" name ="applicable_for" class="form-control" onchange="selected()">
                   <option selected>All</option>
                   <option value="Blind" >Blind</option>
                   <option value="Deaf" >Deaf</option>
@@ -426,7 +579,7 @@ box-shadow: 10px 10px grey;
              </div>
 
         <div class="modal-footer d-flex justify-content-center">
-          <button type="submit" name ="submit" class="btn btn btn-success">Add</button>
+          <button type="submit"style="border: 0.5px solid gray;color:black;"  name ="submit" class="btn btn btn-success">Add</button>
         </div>
       </div>
       </div>

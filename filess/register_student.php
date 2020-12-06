@@ -73,7 +73,9 @@ if(isset($_POST['register_student']))
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.jpg">
     <title>Registeration</title>
+    <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/libs/select2/dist/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/libs/jquery-minicolors/jquery.minicolors.css">
     <link rel="stylesheet" type="text/css" href="../assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
@@ -104,8 +106,8 @@ if(isset($_POST['register_student']))
                   <ul class="navbar-nav float-left mr-auto">
                      <li></li>
                      <li></li>
-                     <li class="nav-item dropdown">
-                       <center><h4 style =" color: white">Choose the language</h4>
+                     <li style ="padding: 10px; height: 35px;" class="nav-item dropdown">
+
                        <div id="google_translate_element"></div>
                        <script type="text/javascript">
                        function googleTranslateElementInit() {
@@ -119,7 +121,7 @@ if(isset($_POST['register_student']))
                   <ul class="navbar-nav float-right">
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link  waves-effect waves-dark" href="#" ><i class="mdi mdi-home font-24"></i> Home
+                        <a class="nav-link  waves-effect waves-dark" href="home.php" ><i class="mdi mdi-home font-24"></i> Home
                         </a>
                     </li>
                     <li class="nav-item dropdown">
@@ -148,37 +150,37 @@ if(isset($_POST['register_student']))
                               <div class="form-group row">
                                   <label for="fname" class="col-sm-3"><h5>First Name</h5></label>
                                   <div class="col-sm-9">
-                                      <input type="text" class="form-control" name ="fname" id="fname" placeholder="First Name Here">
+                                      <input type="text" style="border: 0.5px solid gray;color:black;" class="form-control" name ="fname" id="fname" placeholder="First Name Here">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label for="fname" class="col-sm-3"><h5>Last name</h5></label>
                                   <div class="col-sm-9">
-                                      <input type="text" class="form-control" name ="lname" id="fname" placeholder="Last Name Here">
+                                      <input type="text" style="border: 0.5px solid gray;color:black;" class="form-control" name ="lname" id="fname" placeholder="Last Name Here">
                                   </div>
                               </div>
                               <div class="input-group form-group row">
                                     <label for="lname" class="col-sm-3"><h5>DOB</h5></label>
                                     <div class="col-sm-9">
-                                  <input type="date" name ="dob" class="form-control " placeholder="mm/dd/yyyy">
+                                  <input type="date" style="border: 0.5px solid gray;color:black;" name ="dob" class="form-control " placeholder="mm/dd/yyyy">
                                 </div>
                               </div>
                               <div class="form-group row">
                                   <label class="col-md-3 m-t-15"><h5>State</h5></label>
                                   <div class="col-md-9">
-                                      <input type="text" class="form-control" name ="state" id="state" placeholder="">
+                                      <input type="text"style="border: 0.5px solid gray;color:black;" class="form-control" name ="state" id="state" placeholder="">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label class="col-md-3 m-t-15"><h5>Country</h5></label>
                                   <div class="col-md-9">
-                                      <input type="text" class="form-control" name ="country" id="state" placeholder="">
+                                      <input type="text" style="border: 0.5px solid gray;color:black;" class="form-control" name ="country" id="state" placeholder="">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <label for="lname" class="col-sm-3"><h5>Gender</h5></label>
                                   <div class="col-md-9">
-                                      <select class="select2 form-control custom-select" name ="gender" style="width: 100%; height:36px;">
+                                      <select style="border: 0.5px solid gray;color:black;" class="select2 form-control custom-select" name ="gender" style="width: 100%; height:36px;">
                                           <option>Select</option>
                                           <optgroup label="Gender">
                                               <option value="F"><h5>Female</h5></option>
@@ -229,26 +231,26 @@ if(isset($_POST['register_student']))
                                <div class="form-group row">
                                    <label for="lname" class="col-sm-3"><h5>Email</h5></label>
                                    <div class="col-sm-9">
-                                       <input type="email" class="form-control" name ="email" placeholder="Email address">
+                                       <input type="email" style="border: 0.5px solid gray;color:black;" class="form-control" name ="email" placeholder="Email address">
                                    </div>
                                </div>
                                <div class="form-group row">
                                    <label for="lname" class="col-sm-3"><h5>Mobile No.</h5></label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" name ="mobno" placeholder="Mobile No.">
+                                       <input type="text" style="border: 0.5px solid gray;color:black;" class="form-control" name ="mobno" placeholder="Mobile No.">
                                    </div>
                                </div>
                                <div class="form-group row">
                                    <label for="lname" class="col-sm-3"><h5>user name</h5></label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" name ="user_name" id="user_name" placeholder="user name">
+                                       <input type="text" style="border: 0.5px solid gray;color:black;" class="form-control" name ="user_name" id="user_name" placeholder="user name">
                                    </div>
                                </div>
 
                                <div class="form-group row">
                                    <label for="lname" class="col-sm-3"><h5>Password</h5></label>
                                    <div class="col-sm-9">
-                                       <input type="password" class="form-control" name ="password" id="password" placeholder="Password ">
+                                       <input type="password" style="border: 0.5px solid gray;color:black;" class="form-control" name ="password" id="password" placeholder="Password ">
                                    </div>
                                </div>
                            </div>
@@ -263,7 +265,7 @@ if(isset($_POST['register_student']))
                                   <label class="col-md-3"><h5>Photo</h5></label>
                                   <div class="col-md-9">
                                       <div class="custom-file">
-                                          <input type="file" class="custom-file-input" name ="profile"  id="validatedCustomFile" required>
+                                          <input type="file" style="border: 0.5px solid gray;color:black;" class="custom-file-input" name ="profile"  id="validatedCustomFile" required>
                                           <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                           <div class="invalid-feedback">Example invalid custom file feedback</div>
                                       </div>
@@ -312,7 +314,7 @@ if(isset($_POST['register_student']))
                      <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x" style="font-size:36px; color: #0e76a8"> </i>
                    </a>
                    <a class="ins-ic">
-                     <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x" style="font-size:36px;  color: #3f729b;"> </i>
+                     <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x" style="font-size:36px;  color: pink;"> </i>
                    </a>
                  </div>
                  <div class="row">

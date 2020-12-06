@@ -1,3 +1,10 @@
+<?php
+session_start();
+$con=mysqli_connect('localhost','root','','Abhyuday');
+$user_name = $_SESSION['user_name'];
+$_SESSION['user_name']=$user_name;
+
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <head>
@@ -7,11 +14,30 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.jpg">
-    <title>Quiz</title>
-    <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet">
+
+    <title>Profile student</title>
+    <link rel="stylesheet" type="text/css" href="../assets/libs/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/libs/jquery-minicolors/jquery.minicolors.css">
+    <link rel="stylesheet" type="text/css" href="../assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/libs/quill/dist/quill.snow.css">
     <link href="../dist/css/style.min.css" rel="stylesheet">
+    <style>
+    #user_image{
+      float:left;
+      height:120px;
+      width:120px;
+      border-radius:50%;
+      background-image:url("photo.jpg");
+      background-size: 100% 100%;
+      margin-left:50px;
+      margin-top:10px;
+      opacity:75%;
+    }
+
+    </style>
 </head>
 <body>
+
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -19,45 +45,82 @@
         </div>
     </div>
     <div id="main-wrapper">
-        <header class="topbar" data-navbarbg="skin5">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header" data-logobg="skin5">
-                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                    <a class="navbar-brand" href="">
-                        <b class="logo-icon p-l-10">
-                             <img src="../assets/images/favicon.jpg" alt="user" class="rounded-circle" width="31"></b>
-                        <span class="logo-text">
-                        <h2>Shiksha</h2>
-                      </a>
-                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
-                </div>
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                    <ul class="navbar-nav float-left mr-auto"></ul>
-                    <ul class="navbar-nav float-right">
-                    </ul>
-                </div>
+      <header class="topbar" data-navbarbg="skin5">
+        <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+            <div class="navbar-header" data-logobg="dark">
+                <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                <a class="navbar-brand" href="">
+                    <b class="logo-icon p-l-10">
+                         <img src="../assets/images/favicon.jpg" alt="user" class="rounded-circle" width="31"></b>
+                          <span class="logo-text">
+                          <h2>Shiksha</h2>
+                  </a>
+                <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+            </div>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                <ul class="navbar-nav float-left mr-auto">
+                  <li class="nav-item dropdown">
+                    <center><h4 style =" color: white">Choose the language</h4>
+                    <div id="google_translate_element"></div>
+                    <script type="text/javascript">
+                    function googleTranslateElementInit() {
+                      new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                    }
+                    </script>
+                    <script type="text/javascript" src="language_translation.js"></script>
+                  </center>
+                  </li>
+                </ul>
+                <ul class="navbar-nav float-right">
+                  <li class="nav-item dropdown">
+                      <h4><a class="nav-link  waves-effect waves-dark"><i class="ti-user m-r-5 m"></i>
+                       <?php echo $user_name ?></a></h4>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <h4><a class="nav-link  waves-effect waves-dark" >
+                    </a></h4>
+                  </li>
+                    <li class="nav-item dropdown">
+                      <h4><a class="nav-link  waves-effect waves-dark" href="#" ><i class="mdi mdi-home font-24"></i> Log out
+                      </a></h4>
+                    </li>
+                </ul>
+            </div>
           </nav>
-      </header>
+    </header>
 
       <aside class="left-sidebar" data-sidebarbg="skin5">
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-pen"></i><span class="hide-menu">Quiz</span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Jobs Portal</span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-pen"></i><span class="hide-menu">Quiz</span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Jobs Portal</span></a></li>
+                      <div id="user_image"></div>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false"><span class="hide-menu"></span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false"><span class="hide-menu"></span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="personal.php" aria-expanded="false"><i class="ti-user m-r-5 m"></i><span class="hide-menu">Personal info</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="education.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Education info</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allcourses.php?courses_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Courses</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allscholar.php?scholar_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Scholarships</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Alljobs.php?job_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Jobs</span></a></li>
+
 
                     </ul>
                 </nav>
             </div>
         </aside>
+
         <div class="page-wrapper">
              <div class="page-breadcrumb">
                 <div class="row">
-                    <div class="col-12 d-flex no-block align-items-center">
+                  <div class="col-1 d-flex no-block align-items-center"></div>
+                    <div class="col-11 d-flex no-block align-items-center">
 
-                      <h1 class="page-title">Quiz</h1>
+                      <h2 class="page-title">Exam - Time </h2>
 
                 </div>
             </div>
@@ -71,9 +134,9 @@
       <div class="col-md-1"></div>
       <div class="col-md-10" style="">
      <br>
-     <div class="col-md-12" style="background-color: gray; color: white;">
+     <div class="col-md-12" style="background-color: Azure; color: Black;">
     <br>
-      <h2 id="que">Q1.National Income estimates in India are prepared by </h2>
+      <h3 id="que">Q1.National Income estimates in India are prepared by </h3>
       <br>
     </div>
     <div class="col-md-12" style="background-color: white; font-size:1rem; color: #082287;">
