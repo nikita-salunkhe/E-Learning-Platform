@@ -92,8 +92,8 @@ $query->execute();
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><span class="hide-menu"><h4>See Upload Request of:</h4></span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="admin_course.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Uploaded Courses</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="admin_scholar.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Uploaded Scholarships</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="admin_course.php" aria-expanded="false"><i class="mdi mdi-library"></i><span class="hide-menu">Uploaded Courses</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="admin_scholar.php" aria-expanded="false"><i class="mdi mdi-school"></i><span class="hide-menu">Uploaded Scholarships</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Uploaded Jobs</span></a></li>
                       </ul>
                 </nav>
@@ -102,16 +102,20 @@ $query->execute();
         </div>
         <div class="page-wrapper">
             <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4"></div>
-                      <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
- <center><h2 class="page-title">Jobs Upload Request</h2></center>
-</div>
-   <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4"></div>
+                <div class ="row">
+                <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4"></div>
+                <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
+                <div class ="card">
+                <div class="card-body" style =" background-color: white">
+                    <center>  <h4 >Jobs Request </h4></center>
                 </div>
-                <br>
+              </div>
             </div>
-            <hr>
+            <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4"></div>
+              </div>
+
+              </div>
+
 <div class="container-fluid">
 <?php
  while($res=$run->fetch_assoc())
@@ -153,7 +157,7 @@ $query->execute();
           <div class="col-sm-3 col-md-3 col-xs-3 col-lg-3">
           <br>
         <form action="#" method="get" name="login">
-          <a href="admin_jobs.php?approve=<?php echo $res['id']; ?>" class="btn btn-info btn-lg">Approve</a>
+          <a href="admin_jobs.php?approve=<?php echo $res['id']; ?>" class="btn btn-success btn-lg">Approve</a>
           <a href="admin_jobs.php?reject=<?php echo $res['id']; ?>" class="btn btn-danger btn-lg">Reject</a>
       </form>
     </div>
