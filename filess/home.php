@@ -2,7 +2,10 @@
 session_start();
 $con=mysqli_connect('localhost','root','','Abhyuday');
 
-
+if(isset($_GET['logout'])){
+    header('location:home.php');
+    session_destroy();
+}
 // for login`
 if(isset($_POST['confirm_student']))
 {
@@ -148,18 +151,17 @@ box-shadow: 10px 10px grey;
         <main>
           <br>
           <div class="row">
-            <div class="col-1"></div>
-               <div class="col-10">
+            <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1 "></div>
+                  <div class="col-sm-10 col-md-10 col-xs-10 col-lg-10 ">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <img src="../assets/images/navigation_bar/2.png" class="d-block w-100" alt="...">
                     <div class="carousel-caption">
-                      <br>
-                      <br>
+
                       <div class ="row">
-                        <div class ="col-8"></div>
-                        <div class="col-4">
-                      <div class="card boxx" style="width: 30rem; background: FloralWhite">
+                          <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4 "></div>
+                          <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6 ">
+                      <div class="card boxx" style=" background: Azure">
                          <div class="card-body">
                          <br>
                           <h3 style=" color: black">Get Certified and Get Hired!!</h3>
@@ -171,23 +173,25 @@ box-shadow: 10px 10px grey;
                           </div>
                        </div>
                      </div>
-                     <div class ="col-0"></div>
+                       <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1 "></div>
+                  </div>
                   </div>
               </div>
-              <div class="col-1"></div>
+
           </div>
         </div>
-        <br>
+          <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1 "></div>
+
       </div>
-    </div>
+
       <br>
       <br>
       <br>
       <br>
       <div class="row">
-      <div class="col-1">
+        <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1 ">
       </div>
-      <div class="col-5">
+        <div class="col-sm-5 col-md-5 col-xs-5 col-lg-5 ">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -216,28 +220,30 @@ box-shadow: 10px 10px grey;
         </div>
       </div>
 
-      <div class="col-5">
+      <div class="col-sm-5 col-md-5 col-xs-5 col-lg-5 ">
         <section id="about_us">
           <div class="card-body">
               <h2 class="card-title">Know About Us</h2>
               <h5>
                 <br>
-                Education is the process of facilitating learning, or the acquisition of knowledge, skills, values, beliefs, and habits. Educational methods include teaching, training, storytelling, discussion and directed research. Education frequently takes place under the guidance of educators, however learners can also educate themselves. Education can take place in formal or informal settings and any experience that has a formative effect on the way one thinks, feels, or acts may be considered educational. The methodology of teaching is called pedagogy.
-                Formal education is commonly divided formally into such stages as preschool or kindergarten, primary school, secondary school and then college, university, or apprenticeship.
+                <br>
+                Education is the process of facilitating learning, or the acquisition of knowledge, skills, values, beliefs, and habits. Educational methods include teaching, training, storytelling,
+                discussion and directed research.  This platform provides Scholarship, jobs various courses on differnt topic including  ethical, motivational and academic. students can also give quizes on various topics. Our aim is to make every citizen self dependent and reliable.
+
                <br>
              </h5>
         </div>
       </section>
       </div>
-      <div class="col-1">
+      <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1 ">
       </div>
     </div>
     <br>
 
     <div class="row">
-              <div class="col-1">
+                <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1 ">
               </div>
-              <div class="col-5">
+                <div class="col-sm-5 col-md-5 col-xs-5 col-lg-5 ">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title m-b-0">Updates</h4>
@@ -246,75 +252,63 @@ box-shadow: 10px 10px grey;
                         <li class="d-flex no-block card-body">
                             <i class="fa fa-check-circle w-30px m-t-5"></i>
                             <div>
-                                <a href="#" class="m-b-0 font-medium p-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-                                <span class="text-muted">Added new course</span>
+                                <a  class="m-b-0 font-medium p-0">Added new course for handicapped students.</a>
+
                             </div>
                             <div class="ml-auto">
                                 <div class="tetx-right">
                                     <h5 class="text-muted m-b-0">20</h5>
-                                    <span class="text-muted font-16">Jan</span>
+                                    <span class="text-muted font-16">Dec</span>
                                 </div>
                             </div>
                         </li>
                         <li class="d-flex no-block card-body border-top">
-                            <i class="fa fa-gift w-30px m-t-5"></i>
+                            <i class="fa fa-check-circle w-30px m-t-5"></i>
                             <div>
-                                <a href="#" class="m-b-0 font-medium p-0">1200 students placed!</a>
-                                <span class="text-muted">Congratualations!</span>
+                                <a  class="m-b-0 font-medium p-0">120 students get jobs!</a>
+
                             </div>
                             <div class="ml-auto">
                                 <div class="tetx-right">
                                     <h5 class="text-muted m-b-0">11</h5>
-                                    <span class="text-muted font-16">Jan</span>
+                                    <span class="text-muted font-16">Nov</span>
                                 </div>
                             </div>
                         </li>
                         <li class="d-flex no-block card-body border-top">
                             <i class="fa fa-plus w-30px m-t-5"></i>
                             <div>
-                                <a href="#" class="m-b-0 font-medium p-0">Maruti is a Responsive Admin theme</a>
-                                <span class="text-muted">But already everything was solved. It will ...</span>
+                                <a class="m-b-0 font-medium p-0">New upcoming feature of live chat</a>
+
                             </div>
                             <div class="ml-auto">
                                 <div class="tetx-right">
                                     <h5 class="text-muted m-b-0">19</h5>
-                                    <span class="text-muted font-16">Jan</span>
+                                    <span class="text-muted font-16">Nov</span>
                                 </div>
                             </div>
                         </li>
                         <li class="d-flex no-block card-body border-top">
-                            <i class="fa fa-leaf w-30px m-t-5"></i>
+                            <i class="fa fa-check-circle w-30px m-t-5"></i>
                             <div>
-                                <a href="#" class="m-b-0 font-medium p-0">Envato approved Maruti Admin template</a>
-                                <span class="text-muted">i am very happy to approved by TF</span>
+                                <a href="#" class="m-b-0 font-medium p-0">New year offer for courses</a>
+
                             </div>
                             <div class="ml-auto">
                                 <div class="tetx-right">
                                     <h5 class="text-muted m-b-0">20</h5>
-                                    <span class="text-muted font-16">Jan</span>
+                                    <span class="text-muted font-16">Nov</span>
                                 </div>
                             </div>
                         </li>
-                        <li class="d-flex no-block card-body border-top">
-                            <i class="fa fa-question-circle w-30px m-t-5"></i>
-                            <div>
-                                <a href="#" class="m-b-0 font-medium p-0"> I am alwayse here if you have any question</a>
-                                <span class="text-muted">we glad that you choose our template</span>
-                            </div>
-                            <div class="ml-auto">
-                                <div class="tetx-right">
-                                    <h5 class="text-muted m-b-0">15</h5>
-                                    <span class="text-muted font-16">Jan</span>
-                                </div>
-                            </div>
-                        </li>
+
                     </ul>
                 </div>
 
               </div>
-              <div class="col-1">
+              <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1 ">
               </div>
-              <div class="col-4">
+              <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">What our users are saying?</h4>
@@ -326,18 +320,18 @@ box-shadow: 10px 10px grey;
                                     <div class="chat-img"><img src="../assets/images/users/1.jpg" alt="user"></div>
                                     <div class="chat-content">
                                         <h6 class="font-medium">Katha Patel</h6>
-                                        <div class="box bg-light-info">Lorem Ipsum is simply dummy text of the printing &amp; type setting industry.</div>
+                                        <div class="box bg-light-info">They provide verified scholarships &amp; type setting industry.</div>
                                     </div>
-                                    <div class="chat-time">10:56am 15 Jan 2020</div>
+                                    <div class="chat-time">10:56am 15 Nov 2020</div>
                                 </li>
                                 <!--chat Row -->
                                 <li class="chat-item">
                                   <div class="chat-img"><img src="../assets/images/users/1.jpg" alt="user"></div>
                                   <div class="chat-content">
-                                        <h6 class="font-medium">Swarali Purandare</h6>
-                                        <div class="box bg-light-info">It’s Great opportunity to work.</div>
+                                        <h6 class="font-medium">Riya verma</h6>
+                                        <div class="box bg-light-info">I found good job from here.</div>
                                     </div>
-                                    <div class="chat-time">10:57 am  15 Jan 2020</div>
+                                    <div class="chat-time">10:57 am  15 Dec 2020</div>
                                 </li>
 
                                 <!--chat Row -->
@@ -347,9 +341,9 @@ box-shadow: 10px 10px grey;
                                   <div class="chat-img"><img src="../assets/images/users/1.jpg" alt="user"></div>
                                   <div class="chat-content">
                                         <h6 class="font-medium">Shrushti</h6>
-                                        <div class="box bg-light-info">Well we have good budget for the project</div>
+                                        <div class="box bg-light-info">The courses are easy to understand/div>
                                     </div>
-                                    <div class="chat-time">11:00 am  15 Jan 2020</div>
+                                    <div class="chat-time">11:00 am  10 Dec 2020</div>
                                 </li>
                                 <!--chat Row -->
                             </ul>
@@ -358,7 +352,7 @@ box-shadow: 10px 10px grey;
 
                 </div>
               </div>
-              <div class="col-1">
+              <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1 ">
               </div>
             </div>
 </main>
@@ -411,7 +405,7 @@ box-shadow: 10px 10px grey;
 
     </section>
   </div>
-  <div class="footer-copyright text-center py-3" style="color: #d1c5cd">© 2020 Copyright: KSsquare.com
+
   </div>
 </footer>
 <div class=" my_reg modal" id="myreg">

@@ -4,6 +4,15 @@ $con=mysqli_connect('localhost','root','','Abhyuday');
 $user_name = $_SESSION['user_name'];
 $_SESSION['user_name']=$user_name;
 
+$query_i=$con->prepare("SELECT * FROM `documents` WHERE `user_name`= '$user_name'");
+$query_i->execute();
+$runn_i= $query_i->get_result();
+$run_i=$runn_i->fetch_assoc();
+
+$query_s=$con->prepare("SELECT * FROM `user_info` WHERE `user_name`= '$user_name'");
+$query_s->execute();
+$runn_s= $query_s->get_result();
+$run_s=$runn_s->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -15,7 +24,7 @@ $_SESSION['user_name']=$user_name;
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.jpg">
 
-    <title>Profile student</title>
+    <title>Quiz_List</title>
     <link rel="stylesheet" type="text/css" href="../assets/libs/select2/dist/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/libs/jquery-minicolors/jquery.minicolors.css">
     <link rel="stylesheet" type="text/css" href="../assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
@@ -27,7 +36,7 @@ $_SESSION['user_name']=$user_name;
       height:120px;
       width:120px;
       border-radius:50%;
-      background-image:url("photo.jpg");
+      background-image:url("<?php echo "uploads/".$run_i['profile']?>");
       background-size: 100% 100%;
       margin-left:50px;
       margin-top:10px;
@@ -102,12 +111,11 @@ $_SESSION['user_name']=$user_name;
                       <br>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false"><span class="hide-menu"></span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false"><span class="hide-menu"></span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="personal.php" aria-expanded="false"><i class="ti-user m-r-5 m"></i><span class="hide-menu">Personal info</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="education.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Education info</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allcourses.php?courses_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Courses</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allscholar.php?scholar_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Scholarships</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><i class="ti-user m-r-5 m"></i><span class="hide-menu"><?php echo $run_s['fname']." ".$run_s['lname']?></span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allcourses.php?courses_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-library"></i><span class="hide-menu">Courses</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allscholar.php?scholar_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-school"></i><span class="hide-menu"> Scholarships</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Alljobs.php?job_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Jobs</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Quiz</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-pen"></i><span class="hide-menu"> Quiz</span></a></li>
 
                     </ul>
                 </nav>
@@ -133,7 +141,7 @@ $_SESSION['user_name']=$user_name;
                 <div class="col-md-7 col-lg-7 col-xlg-7">
                   <div class="card card-hover">
                       <div class="box  "style=" background-color:  #21d4ec;height: 4rem;">
-                          <span class="text-white" ><b style="font-size: 1.4rem ; color:white;">Braile</b></span><a href="quiz.php" ><button class="btn btn-default btn-lg float-right" type="submit"> Start </button></a>
+                          <span class="text-white" ><b style="font-size: 1.4rem ; color:white;">Animation</b></span><a href="quiz.php" ><button class="btn btn-default btn-lg float-right" type="submit"> Start </button></a>
                           <hr style="background-color : white;">
                       </div>
                   </div>
@@ -151,13 +159,13 @@ $_SESSION['user_name']=$user_name;
                   </div>
                   <div class="card card-hover">
                       <div class="box bg-cyan "style="height: 4rem;">
-                          <span class="text-white" style="font-size: 1.4rem"><b style="font-size: 1.4rem ; color: white;">ITI for Blind</b></span><a href="quiz.html" ><button class="btn btn-default btn-lg float-right" type="submit"> Start </button></a>
+                          <span class="text-white" style="font-size: 1.4rem"><b style="font-size: 1.4rem ; color: white;">Information Technology</b></span><a href="quiz.html" ><button class="btn btn-default btn-lg float-right" type="submit"> Start </button></a>
                           <hr style="background-color : white;">
                       </div>
                   </div>
                   <div class="card card-hover">
                       <div class="box  "style=" background-color:  #21d4ec;height: 4rem;">
-                          <span class="text-white" ><b style="font-size: 1.4rem ; color:white;">Animation</b></span><a href="quiz.html" ><button class="btn btn-default btn-lg float-right" type="submit"> Start </button></a>
+                          <span class="text-white" ><b style="font-size: 1.4rem ; color:white;">Accounting </b></span><a href="quiz.html" ><button class="btn btn-default btn-lg float-right" type="submit"> Start </button></a>
                           <hr style="background-color : white;">
                       </div>
                   </div>
@@ -172,17 +180,22 @@ $_SESSION['user_name']=$user_name;
                 </div>
                 <div class="card">
                     <div class="card-body">
+                        <h4 class="card-title m-b-0">To narrate press spacebar</h4>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
                         <h4 class="card-title m-b-0">To give answer press control</h4>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title m-b-0">To goto previous question press Right arrow</h4>
+                        <h4 class="card-title m-b-0">To goto previous question press Left arrow</h4>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title m-b-0">To goto next question press Left arrow</h4>
+                        <h4 class="card-title m-b-0">To goto next question press Right arrow</h4>
                     </div>
                 </div>
                 <div class="card">
@@ -217,8 +230,8 @@ $_SESSION['user_name']=$user_name;
       readOutLoud("You Are Now on Quiz Page ");
       readOutLoud("These are general Instructions  before attaining Quizz");
       readOutLoud("To narrate  question press spacebar ");
-      readOutLoud("To goto previous question press Right arrow");
-      readOutLoud("To goto next question press Left arrow");
+      readOutLoud("To goto previous question press Left arrow");
+      readOutLoud("To goto next question press Right arrow");
       readOutLoud("To pause narration press shift ");
       readOutLoud("To give answer press control button ");
       readOutLoud("To submit Quiz Press Enters");

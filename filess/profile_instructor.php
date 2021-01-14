@@ -3,6 +3,11 @@ session_start();
 $con=mysqli_connect('localhost','root','','Abhyuday');
 $user_name = $_SESSION['user_name'];
 
+$query_i=$con->prepare("SELECT * FROM `instructor_info` WHERE `user_name`= '$user_name'");
+$query_i->execute();
+$runn_i= $query_i->get_result();
+$run_i=$runn_i->fetch_assoc();
+
 if(isset($_POST['submit']))
 {
   $course_name=$_POST['course_name'];
@@ -49,7 +54,7 @@ if(isset($_POST['submit_jobs']))
     $link=$_POST['link'];
     $user_name = $_SESSION['user_name'];
             $query1=$con->prepare("INSERT INTO `jobs`(`name_of_company`,`designation`, `job_description`, `skills_required`,`applicable_for`, `location`, `Stipend`, `last_date`,`link`, `user_name`) VALUES (?,?,?,?,?,?,?,?,?,?)");
-            $query1->bind_param("ssssssssss",$name_of_company, $designation, $job_description, $skills_required,  $applicable_for, $location, $Stipend, $last_date, $link, $user_name);
+            $query1->bind_param("ssssssssss",$name_of_company, $designation, $job_description, $skills_required,  $applicable_for, $location, $stipend, $last_date, $link, $user_name);
             $query1->execute();
             echo '<script>alert("registered sucessfully")</script>';
       }
@@ -115,17 +120,19 @@ box-shadow: 10px 10px grey;
   background-image: url(https://cdn.dnaindia.com/sites/default/files/styles/full/public/2018/09/05/726641-online-coursethinkstockphotos.jpg);
       background-repeat: no-repeat;
     background-position: right;
-    background-size: 1300px;
+
     backface-visibility: ;
     height: 10rem;
+    box-shadow: 0 14px 25px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 .card-2{
       background-image: url(https://th.bing.com/th/id/OIP.E4lar9PM9mMhq0bIpq9VoQHaHa?pid=Api&rs=1);
           background-repeat: no-repeat;
         background-position: right;
-        background-size: 600px;
+
         backface-visibility: ;
         height: 30rem;
+        box-shadow: 0 46px 25px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     }
 
 .card-3{
@@ -133,8 +140,9 @@ box-shadow: 10px 10px grey;
 
           background-repeat: no-repeat;
         background-position: left;
-        background-size: 600px;
+
         height: 30rem;
+        box-shadow: 0 14px 25px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     }
 
 @media(max-width: 990px){
@@ -188,7 +196,7 @@ box-shadow: 10px 10px grey;
                       </a></h4>
                     </li>
                       <li class="nav-item dropdown">
-                        <h4><a class="nav-link  waves-effect waves-dark" href="home.php" ><i class="mdi mdi-home font-24"></i> Log out
+                        <h4><a class="nav-link  waves-effect waves-dark" href="home.php?logout= logout" ><i class="mdi mdi-home font-24"></i> Log out
                         </a></h4>
                       </li>
                   </ul>
@@ -199,10 +207,14 @@ box-shadow: 10px 10px grey;
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="personal.php" aria-expanded="false"><i class="ti-user m-r-5 m"></i><span class="hide-menu">personal info</span></a></li>
+
+                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><span class="hide-menu"><h4>See your status of:</h4></span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false"><i class="ti-user m-r-5 m"></i><span class="hide-menu"><?php echo $run_i['fname']." ". $run_i['lname']?></span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false"> <i class="fa fa-institution" style="font-size:24px"></i><span class="hide-menu"><?php echo $run_i['name_of_organization'] ?></span></a></li>
+
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false"><span class="hide-menu"><h4>See your status of:</h4></span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#course_status" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Submitted Courses</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#job_status" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Submitted Scholarships</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#course_status" aria-expanded="false"><i class="mdi mdi-library"></i><span class="hide-menu">Submitted Courses</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#job_status" aria-expanded="false"><i class="mdi mdi-school"></i><span class="hide-menu">Submitted Scholarships</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#job_status" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Submitted Jobs</span></a></li>
                     </ul>
                 </nav>
@@ -301,7 +313,7 @@ box-shadow: 10px 10px grey;
 
                                  </div>
                                  <div class="modal-footer d-flex justify-content-center">
-                                   <input type = "submit" class="btn btn-unique" name ="submit_jobs"><i class="fas fa-paper-plane-o ml-1"></i></button>
+                                   <input type = "submit" class="btn btn-success btn-lg" name ="submit_jobs"><i class="fas fa-paper-plane-o ml-1"></i></button>
                                  </div>
                                </form>
                             </div>
@@ -437,8 +449,8 @@ box-shadow: 10px 10px grey;
       <div class="col-5 align-items-center">
         <center><h3><b> Registered  Jobs</b></h3></center>
         <table class="table table-hover table table-bordered table table-striped table table-hover">
-          <thead>
-            <tr>
+          <thead class="">
+            <tr >
               <th scope="col">Sr No.</th>
               <th scope="col">Company Name</th>
 
@@ -521,7 +533,9 @@ box-shadow: 10px 10px grey;
  </div>
  </div>
 </div>
-
+<br>
+<br>
+<br>
 
 </main>
 <!-- courses-->

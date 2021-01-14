@@ -3,6 +3,16 @@ session_start();
 $con=mysqli_connect('localhost','root','','Abhyuday');
 $user_name = $_SESSION['user_name'];
 $_SESSION['user_name']=$user_name;
+$query_i=$con->prepare("SELECT * FROM `documents` WHERE `user_name`= '$user_name'");
+$query_i->execute();
+$runn_i= $query_i->get_result();
+$run_i=$runn_i->fetch_assoc();
+
+$query_s=$con->prepare("SELECT * FROM `user_info` WHERE `user_name`= '$user_name'");
+$query_s->execute();
+$runn_s= $query_s->get_result();
+$run_s=$runn_s->fetch_assoc();
+
 if(isset($_GET['watch']))
 {
   $id = $_GET['watch'];
@@ -20,7 +30,7 @@ if(isset($_GET['watch']))
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.jpg">
-    <title>Courses</title>
+    <title>My_course</title>
     <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <link href="../dist/css/style.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -33,7 +43,7 @@ if(isset($_GET['watch']))
       height:120px;
       width:120px;
       border-radius:50%;
-      background-image:url("photo.jpg");
+      background-image:url("<?php echo "uploads/".$run_i['profile']?>");
       background-size: 100% 100%;
       margin-left:50px;
       margin-top:10px;
@@ -86,7 +96,7 @@ if(isset($_GET['watch']))
                     </a></h4>
                   </li>
                     <li class="nav-item dropdown">
-                      <h4><a class="nav-link  waves-effect waves-dark" href="#" ><i class="mdi mdi-home font-24"></i> Log out
+                      <h4><a class="nav-link  waves-effect waves-dark" href="home.php?logout=logout" ><i class="mdi mdi-home font-24"></i> Log out
                       </a></h4>
                     </li>
                 </ul>
@@ -106,13 +116,12 @@ if(isset($_GET['watch']))
                     <br>
                     <br>
                       <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false"><span class="hide-menu"></span></a></li>
-                      
-                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="personal.php" aria-expanded="false"><i class="ti-user m-r-5 m"></i><span class="hide-menu">Personal info</span></a></li>
-                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="education.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Education info</span></a></li>
-                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allcourses.php?courses_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Courses</span></a></li>
-                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allscholar.php?scholar_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Scholarships</span></a></li>
+
+                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="personal.php" aria-expanded="false"><i class="ti-user m-r-5 m"></i><span class="hide-menu"><?php echo $run_s['fname']." ".$run_s['lname']?></span></a></li>
+                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allcourses.php?courses_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-library"></i><span class="hide-menu">Courses</span></a></li>
+                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allscholar.php?scholar_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-school"></i><span class="hide-menu"> Scholarships</span></a></li>
                       <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Alljobs.php?job_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Jobs</span></a></li>
-                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="all_quiz.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Quiz</span></a></li>
+                      <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="all_quiz.php" aria-expanded="false"><i class="mdi mdi-pen"></i><span class="hide-menu"> Quiz</span></a></li>
 
                   </ul>
               </nav>
@@ -140,8 +149,14 @@ if(isset($_GET['watch']))
       <br>
       <br>
       <br>
-     </div>
+      <br>
+      <br>
+      <br>
+      <br>
 
+
+     </div>
+</div>
 
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>

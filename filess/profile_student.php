@@ -2,6 +2,17 @@
 session_start();
 $con=mysqli_connect('localhost','root','','Abhyuday');
 $user_name = $_SESSION['user_name'];
+
+$query_i=$con->prepare("SELECT * FROM `documents` WHERE `user_name`= '$user_name'");
+$query_i->execute();
+$runn_i= $query_i->get_result();
+$run_i=$runn_i->fetch_assoc();
+
+$query_s=$con->prepare("SELECT * FROM `user_info` WHERE `user_name`= '$user_name'");
+$query_s->execute();
+$runn_s= $query_s->get_result();
+$run_s=$runn_s->fetch_assoc();
+
 $_SESSION['user_name']=$user_name;
 $query=$con->prepare("SELECT * FROM `enrolled_courses` WHERE `user_name`= '$user_name'");
 $query->execute();
@@ -31,11 +42,14 @@ $row=$run->num_rows;
       height:120px;
       width:120px;
       border-radius:50%;
-      background-image:url("photo.jpg");
+      background-image:url("<?php echo "uploads/".$run_i['profile']?>");
       background-size: 100% 100%;
       margin-left:50px;
       margin-top:10px;
       opacity:75%;
+    }
+    body{
+
     }
 
     </style>
@@ -85,7 +99,7 @@ $row=$run->num_rows;
                     </a></h4>
                   </li>
                     <li class="nav-item dropdown">
-                      <h4><a class="nav-link  waves-effect waves-dark" href="home.php" ><i class="mdi mdi-home font-24"></i> Log out
+                      <h4><a class="nav-link  waves-effect waves-dark" href="home.php?logout=logout" ><i class="mdi mdi-home font-24"></i> Log out
                       </a></h4>
                     </li>
                 </ul>
@@ -109,12 +123,11 @@ $row=$run->num_rows;
 
 
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="personal.php" aria-expanded="false"><i class="ti-user m-r-5 m"></i><span class="hide-menu">Personal info</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="education.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Education info</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allcourses.php?courses_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Courses</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allscholar.php?scholar_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Scholarships</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="personal.php" aria-expanded="false"><i class="ti-user m-r-5 m"></i><span class="hide-menu"><?php echo $run_s['fname']." ".$run_s['lname']?></span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allcourses.php?courses_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-library"></i><span class="hide-menu">Courses</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allscholar.php?scholar_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-school"></i><span class="hide-menu"> Scholarships</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Alljobs.php?job_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Jobs</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="all_quiz.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Quiz</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="all_quiz.php" aria-expanded="false"><i class="mdi mdi-pen"></i><span class="hide-menu"> Quiz</span></a></li>
 
                     </ul>
                 </nav>
@@ -134,9 +147,9 @@ $row=$run->num_rows;
               <div class="card">
                 <div class="card-body">
                       <h4 class="card-title m-b-0">My Applied Courses</h4>
+
                 </div>
               </div>
-
        <?php
        while($res=$run->fetch_assoc())
        { ?>
@@ -233,8 +246,14 @@ $row=$run->num_rows;
               </div>
             </div>
             <div class="col-lg-1"></div>
+
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
        </div>
+
 
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>
@@ -254,5 +273,8 @@ $row=$run->num_rows;
     <script src="../assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
     <script src="../assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="../assets/libs/quill/dist/quill.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

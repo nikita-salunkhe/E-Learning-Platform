@@ -4,6 +4,16 @@ $con=mysqli_connect('localhost','root','','Abhyuday');
 $user_name = $_SESSION['user_name'];
 $_SESSION['user_name']=$user_name;
 
+$query_i=$con->prepare("SELECT * FROM `documents` WHERE `user_name`= '$user_name'");
+$query_i->execute();
+$runn_i= $query_i->get_result();
+$run_i=$runn_i->fetch_assoc();
+
+$query_s=$con->prepare("SELECT * FROM `user_info` WHERE `user_name`= '$user_name'");
+$query_s->execute();
+$runn_s= $query_s->get_result();
+$run_s=$runn_s->fetch_assoc();
+
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -15,7 +25,7 @@ $_SESSION['user_name']=$user_name;
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.jpg">
 
-    <title>Profile student</title>
+    <title>Quiz</title>
     <link rel="stylesheet" type="text/css" href="../assets/libs/select2/dist/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/libs/jquery-minicolors/jquery.minicolors.css">
     <link rel="stylesheet" type="text/css" href="../assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
@@ -27,7 +37,7 @@ $_SESSION['user_name']=$user_name;
       height:120px;
       width:120px;
       border-radius:50%;
-      background-image:url("photo.jpg");
+      background-image:url("<?php echo "uploads/".$run_i['profile']?>");
       background-size: 100% 100%;
       margin-left:50px;
       margin-top:10px;
@@ -102,11 +112,10 @@ $_SESSION['user_name']=$user_name;
                       <br>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false"><span class="hide-menu"></span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false"><span class="hide-menu"></span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="personal.php" aria-expanded="false"><i class="ti-user m-r-5 m"></i><span class="hide-menu">Personal info</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="education.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Education info</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allcourses.php?courses_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Courses</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allscholar.php?scholar_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Scholarships</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Alljobs.php?job_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Jobs</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="personal.php" aria-expanded="false"><i class="ti-user m-r-5 m"></i><span class="hide-menu"><?php echo $run_s['fname']." ".$run_s['lname']?></span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allcourses.php?courses_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-library"></i><span class="hide-menu">Courses</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allscholar.php?scholar_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-school"></i><span class="hide-menu"> Scholarships</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Alljobs.php?job_page=<?php echo $user_name;?>" aria-expanded="false"><i class="mdi mdi-pen"></i><span class="hide-menu"> Jobs</span></a></li>
 
 
                     </ul>

@@ -161,11 +161,11 @@ $con=mysqli_connect('localhost','root','','Abhyuday');
                                   <div class="col-md-9">
                                       <select style="border: 0.5px solid gray;color:black;" class="select2 form-control custom-select" name ="gender" style="width: 100%; height:36px;">
                                           <option>Select</option>
-                                          <optgroup label="Gender">
+
                                               <option value="F">Female</option>
                                               <option value="M">Male</option>
                                               <option value="O">Other</option>
-                                          </optgroup>
+
 
                                       </select>
                                   </div>
@@ -283,9 +283,7 @@ $con=mysqli_connect('localhost','root','','Abhyuday');
 
              </section>
            </div>
-           <div class="footer-copyright text-center py-3" style="color: #d1c5cd">© 2020 Copyright: KSsquare.com
-           </div>
-
+          
          </footer>
 
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>

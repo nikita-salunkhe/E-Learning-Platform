@@ -74,7 +74,7 @@ if(isset($_POST['register_student']))
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.jpg">
-    <title>Registeration</title>
+    <title>Registration</title>
     <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../assets/libs/select2/dist/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/libs/jquery-minicolors/jquery.minicolors.css">
@@ -182,11 +182,11 @@ if(isset($_POST['register_student']))
                                   <div class="col-md-9">
                                       <select style="border: 0.5px solid gray;color:black;" class="select2 form-control custom-select" name ="gender" style="width: 100%; height:36px;">
                                           <option>Select</option>
-                                          <optgroup label="Gender">
+
                                               <option value="F"><h5>Female</h5></option>
                                               <option value="M"><h5>Male</h5></option>
                                               <option value="O"><h5>Other</h5></option>
-                                          </optgroup>
+
 
                                       </select>
                                   </div>

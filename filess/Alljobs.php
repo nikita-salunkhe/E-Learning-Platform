@@ -27,10 +27,10 @@ $row=$run->num_rows;
 
     <style>
         body{
-          background-color: lavender;
+          background-color: white;
         }
         .boxx{
-        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+        box-shadow: 0 16px 30px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
         }
     </style>
 </head>
@@ -110,15 +110,12 @@ $row=$run->num_rows;
                           </a></h4>
                         </li>
                           <li class="nav-item dropdown">
-                            <h4><a class="nav-link  waves-effect waves-dark" href="#" ><i class="mdi mdi-home font-24"></i> Log out</a></h4>
+                            <h4><a class="nav-link  waves-effect waves-dark" href="home.php?logout=logout" ><i class="mdi mdi-home font-24"></i> Log out</a></h4>
                           </li>
 
                           <?php
                         }
-
                       ?>
-
-
                   </ul>
               </div>
             </nav>
@@ -129,14 +126,14 @@ $row=$run->num_rows;
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allcourses.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu">Courses</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allscholar.php" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Scholarships</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allcourses.php" aria-expanded="false"><i class="mdi mdi-library"></i><span class="hide-menu">Courses</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Allscholar.php" aria-expanded="false"><i class="mdi mdi-school"></i><span class="hide-menu"> Scholarships</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="mdi mdi-laptop"></i><span class="hide-menu"> Jobs</span></a></li>
                     </ul>
                 </nav>
             </div>
         </aside>
-        <div class="page-wrapper" >
+      <div class="page-wrapper"  style="background-color: white;">
             <div class="page-breadcrumb">
 
 <br>
@@ -145,6 +142,20 @@ $row=$run->num_rows;
 <div class ="row">
 <div class="col-sm-1 col-md-1 col-xs-1 col-lg-1"></div>
 <div class="col-sm-10 col-md-10 col-xs-10 col-lg-10">
+  <div class="card">
+    <div class ="row">
+    <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4"></div>
+    <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4">
+    <center><div class="card-body" style="background-color:Lavender";>
+          <h4 class="card-title m-b-0">Apply for Jobs</h4>
+
+    </div>
+  </div>
+      <div class="col-sm-4 col-md-4 col-xs-4 col-lg-4"></div>
+
+    </center>
+  </div>
+</div>
 
 <div id="type"></div>
 </div>
@@ -215,7 +226,7 @@ tab += ` <div class="card boxx" style=" background-color:  Azure">
     <br>
     <div class="col-sm-3 col-md-3 col-xs-3 col-lg-3">
     <br>
-      <a href="<?php echo $res['link']; ?>" class="btn btn-success btn-lg">Apply</a>
+      <a href="<?php echo $res['link']; ?>" class="btn btn-primary btn-lg">Apply</a>
 </div>
 </div>
 </div>
@@ -261,7 +272,7 @@ tab += `                  <div class="card boxx" style=" background-color:  Azur
     <br>
     <div class="col-sm-3 col-md-3 col-xs-3 col-lg-3">
     <br>
-      <a href="<?php echo $res['link']; ?>" class="btn btn-success btn-lg">Apply</a>
+      <a href="<?php echo $res['link']; ?>" class="btn btn-primary btn-lg">Apply</a>
 </div>
 </div>
 </div>
